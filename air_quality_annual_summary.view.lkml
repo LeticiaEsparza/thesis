@@ -2,26 +2,31 @@ view: air_quality_annual_summary {
   sql_table_name: looker_scratch.air_quality_annual_summary ;;
 
   dimension: address {
+    description: "The approximate street address of the monitoring site."
     type: string
     sql: ${TABLE}.address ;;
   }
 
   dimension: arithmetic_mean {
+    description: "The average (arithmetic mean) value for the year."
     type: number
     sql: ${TABLE}.arithmetic_mean ;;
   }
 
   dimension: arithmetic_standard_dev {
+    description: "The standard deviation about the mean of the values for the year."
     type: number
     sql: ${TABLE}.arithmetic_standard_dev ;;
   }
 
   dimension: cbsa_name {
+    description: "The name of the core bases statistical area (metropolitan area) where the monitoring site is located."
     type: string
     sql: ${TABLE}.cbsa_name ;;
   }
 
   dimension: certification_indicator {
+    description: "An indication whether the completeness and accuracy of the information on the annual summary record has been certified by the submitter. Certified means the submitter has certified the data (due May 01 the year after collection). Certification not required means that the parameter does not require certification or the deadline has not yet passed. Uncertified (past due) means that certification is required but is overdue. Requested but not yet concurred means the submitter has completed the process, but EPA has not yet acted to certify the data. Requested but denied means the submitter has completed the process, but EPA has denied the request for cause. Was certified but data changed means the data was certified but data was replaced and the process has not been repeated."
     type: string
     sql: ${TABLE}.certification_indicator ;;
   }
