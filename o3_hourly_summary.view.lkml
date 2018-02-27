@@ -73,7 +73,7 @@ view: o3_hourly_summary {
 
   #location with latitude and longitute dimensions
 
-  dimension: location{
+  dimension: location {
     type: location
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
@@ -188,7 +188,7 @@ view: o3_hourly_summary {
   }
 
   dimension: state_name {
-    type: string
+    map_layer_name: us_states
     sql: ${TABLE}.state_name ;;
   }
 
