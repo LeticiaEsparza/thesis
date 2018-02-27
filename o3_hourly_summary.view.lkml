@@ -116,6 +116,59 @@ view: o3_hourly_summary {
     sql: ${TABLE}.sample_measurement ;;
   }
 
+  #measures for sample measurement
+  measure: avg_sample_measurement {
+    type: average
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sum_sample_measurement{
+    type: sum
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  # returns the midpoint value for the values in a given field
+  measure: median_sample_measurement{
+    type: median
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: max_sample_measurement{
+    type: max
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: min_sample_measurement{
+    type: min
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurment_25_percentile{
+    type: percentile
+    percentile: 25
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurment_50_percentile{
+    type: percentile
+    percentile: 50
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurment_75_percentile{
+    type: percentile
+    percentile: 75
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurment_90_percentile{
+    type: percentile
+    percentile: 90
+    sql: ${TABLE}.sample_measurement ;;
+  }
+  # measures end
+
+
   dimension: site_num {
     type: string
     sql: ${TABLE}.site_num ;;
