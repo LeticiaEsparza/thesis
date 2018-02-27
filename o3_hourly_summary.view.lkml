@@ -152,25 +152,25 @@ view: o3_hourly_summary {
     sql: ${TABLE}.sample_measurement ;;
   }
 
-  measure: sample_measurment_25_percentile{
+  measure: sample_measurement_25_percentile{
     type: percentile
     percentile: 25
     sql: ${TABLE}.sample_measurement ;;
   }
 
-  measure: sample_measurment_50_percentile{
+  measure: sample_measurement_50_percentile{
     type: percentile
     percentile: 50
     sql: ${TABLE}.sample_measurement ;;
   }
 
-  measure: sample_measurment_75_percentile{
+  measure: sample_measurement_75_percentile{
     type: percentile
     percentile: 75
     sql: ${TABLE}.sample_measurement ;;
   }
 
-  measure: sample_measurment_90_percentile{
+  measure: sample_measurement_90_percentile{
     type: percentile
     percentile: 90
     sql: ${TABLE}.sample_measurement ;;
