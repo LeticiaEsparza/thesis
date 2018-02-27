@@ -1,4 +1,5 @@
 view: o3_hourly_summary {
+  # OZONE
   sql_table_name: looker_scratch.o3_hourly_summary ;;
 
   dimension: county_code {
