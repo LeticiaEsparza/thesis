@@ -71,6 +71,14 @@ view: o3_hourly_summary {
     sql: ${TABLE}.longitude ;;
   }
 
+  #location with latitude and longitute dimensions
+
+  dimension: location{
+    type: location
+    sql_latitude: ${TABLE}.latitude ;;
+    sql_longitude: ${TABLE}.longitude ;;
+  }
+
   dimension: mdl {
     type: number
     sql: ${TABLE}.mdl ;;
