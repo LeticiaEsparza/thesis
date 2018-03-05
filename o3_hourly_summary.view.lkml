@@ -2,6 +2,12 @@ view: o3_hourly_summary {
   # OZONE
   sql_table_name: looker_scratch.o3_hourly_summary ;;
 
+ dimension: o3_key {
+   type: string
+   primary_key: yes
+   sql: CONCAT(${state_code}," ",${county_code}," ",${site_num}," ",${datum}," ", CAST(${poc} AS string)," ",CAST(${date_gmt_date} AS string)," ",${time_gmt}) ;;
+ }
+
   dimension: county_code {
     type: string
     sql: ${TABLE}.county_code ;;
@@ -175,6 +181,7 @@ view: o3_hourly_summary {
     percentile: 90
     sql: ${TABLE}.sample_measurement ;;
   }
+
   # measures end
 
 
