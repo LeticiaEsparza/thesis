@@ -16,9 +16,41 @@ explore:  air_quality_annual_summary{}
 # Criteria Gases: Carbon monoxide (CO); Ground-level Ozone (O3); Nitrogen Dioxide (NO2); Sulfur Dioxide (SO2)
 # Toxics: Lead (Pb); Hazardous Air Pollutants (HAPs); Nitrous Oxides (NONOxNOy); Volatile Organic Compounds (VOCs)
 
+
+explore: o3_hourly_summary {
+  label: "Criteria Gases"
+  join: so2_hourly_summary {
+    type: full_outer
+    sql_on: ${o3_hourly_summary.o3_key}=${so2_hourly_summary.so2_key} ;;
+    relationship: many_to_one
+  }
+  join: co_hourly_summary {
+    type: full_outer
+    sql_on: ${o3_hourly_summary.o3_key}=${co_hourly_summary.co_key} ;;
+    relationship: many_to_one
+  }
+  join: no2_hourly_summary {
+    type: full_outer
+    sql: ${o3_hourly_summary.o3_key}=${no2_hourly_summary.no2_key} ;;
+    relationship: many_to_one
+  }
+
+}
+
+explore: so2_hourly_summary {
+
+}
+
+explore: co_hourly_summary {
+
+}
+
+explore: no2_hourly_summary {
+
+}
 # explore: co_daily_summary {}
 #
-explore: co_hourly_summary {}
+# explore: co_hourly_summary {}
 #
 # explore: hap_daily_summary {}
 #
@@ -28,7 +60,7 @@ explore: co_hourly_summary {}
 #
 # explore: no2_daily_summary {}
 #
-explore: no2_hourly_summary {}
+# explore: no2_hourly_summary {}
 #
 # explore: nonoxnoy_daily_summary {}
 #
@@ -36,7 +68,7 @@ explore: no2_hourly_summary {}
 #
 # explore: o3_daily_summary {}
 #
-explore: o3_hourly_summary {}
+# explore: o3_hourly_summary {}
 #
 # explore: pm10_daily_summary {}
 #
@@ -64,7 +96,7 @@ explore: o3_hourly_summary {}
 #
 # explore: so2_daily_summary {}
 #
-explore: so2_hourly_summary {}
+# explore: so2_hourly_summary {}
 #
 # explore: temperature_daily_summary {}
 #
