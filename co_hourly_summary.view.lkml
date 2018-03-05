@@ -1,6 +1,12 @@
 view: co_hourly_summary {
   sql_table_name: looker_scratch.co_hourly_summary ;;
 
+  dimension: co_key {
+    type: string
+    primary_key: yes
+    sql: CONCAT(${state_code}," ",${county_code}," ",${site_num}," ",${datum}," ", CAST(${poc} AS string)," ",CAST(${date_gmt_date} AS string)," ",${time_gmt}) ;;
+  }
+
   dimension: county_code {
     type: string
     sql: ${TABLE}.county_code ;;
