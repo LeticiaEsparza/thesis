@@ -20,17 +20,17 @@ explore:  air_quality_annual_summary{}
 explore: o3_hourly_summary {
   label: "Criteria Gases"
   join: so2_hourly_summary {
-    type: full_outer
+    type: left_outer
     sql_on: ${o3_hourly_summary.o3_key}=${so2_hourly_summary.so2_key} ;;
     relationship: many_to_one
   }
   join: co_hourly_summary {
-    type: full_outer
+    type: left_outer
     sql_on: ${o3_hourly_summary.o3_key}=${co_hourly_summary.co_key} ;;
     relationship: many_to_one
   }
   join: no2_hourly_summary {
-    type: full_outer
+    type: left_outer
     sql: ${o3_hourly_summary.o3_key}=${no2_hourly_summary.no2_key} ;;
     relationship: many_to_one
   }
