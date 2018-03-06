@@ -17,25 +17,41 @@ explore:  air_quality_annual_summary{}
 # Toxics: Lead (Pb); Hazardous Air Pollutants (HAPs); Nitrous Oxides (NONOxNOy); Volatile Organic Compounds (VOCs)
 
 
-explore: o3_hourly_summary {
-  label: "Criteria Gases"
-  join: so2_hourly_summary {
-    type: left_outer
-    sql_on: ${o3_hourly_summary.o3_key}=${so2_hourly_summary.so2_key} ;;
-    relationship: many_to_one
-  }
-  join: co_hourly_summary {
-    type: left_outer
-    sql_on: ${o3_hourly_summary.o3_key}=${co_hourly_summary.co_key} ;;
-    relationship: many_to_one
-  }
-  join: no2_hourly_summary {
-    type: left_outer
-    sql: ${o3_hourly_summary.o3_key}=${no2_hourly_summary.no2_key} ;;
-    relationship: many_to_one
-  }
+explore: wind_hourly_summary {
 
+  join: o3_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${wind_hourly_summary.state_name}=${o3_hourly_summary.state_name}
+              AND ${o3_hourly_summary.date_gmt_raw}=${wind_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt}=${o3_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name}=${o3_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num}=${o3_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure}="Knots"
+              ;;
+  }
 }
+
+#
+explore: o3_hourly_summary {}
+#   label: "Criteria Gases"
+#   join: so2_hourly_summary {
+#     type: left_outer
+#     sql_on: ${o3_hourly_summary.o3_key}=${so2_hourly_summary.so2_key} ;;
+#     relationship: many_to_one
+#   }
+#   join: co_hourly_summary {
+#     type: left_outer
+#     sql_on: ${co_hourly_summary.co_key}=${o3_hourly_summary.o3_key} ;;
+#     relationship: many_to_one
+#   }
+#   join: no2_hourly_summary {
+#     type:left_outer
+#     sql: ${o3_hourly_summary.o3_key}=${no2_hourly_summary.no2_key} ;;
+#     relationship: many_to_one
+#   }
+#
+# }
 
 explore: so2_hourly_summary {
 

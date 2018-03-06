@@ -116,6 +116,13 @@ view: wind_hourly_summary {
     sql: ${TABLE}.sample_measurement ;;
   }
 
+  dimension: sample_tier{
+    type: tier
+    tiers: [0,10,20,30,40,50,60,70,80,90]
+    style: classic
+    sql: ${sample_measurement} ;;
+  }
+
   dimension: site_num {
     type: string
     sql: ${TABLE}.site_num ;;
@@ -155,4 +162,10 @@ view: wind_hourly_summary {
     type: count
     drill_fields: [parameter_name, county_name, method_name, state_name]
   }
+
+  measure: avg {
+    type: average
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
 }
