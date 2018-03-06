@@ -18,6 +18,7 @@ explore:  air_quality_annual_summary{}
 
 
 explore: wind_hourly_summary {
+  label: "Wind and Criteria Gases"
   join: o3_hourly_summary {
     type: inner
     relationship: one_to_one
