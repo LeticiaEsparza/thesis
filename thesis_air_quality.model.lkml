@@ -18,7 +18,6 @@ explore:  air_quality_annual_summary{}
 
 
 explore: wind_hourly_summary {
-
   join: o3_hourly_summary {
     type: inner
     relationship: one_to_one
@@ -28,12 +27,44 @@ explore: wind_hourly_summary {
               AND ${wind_hourly_summary.county_name}=${o3_hourly_summary.county_name}
               AND ${wind_hourly_summary.site_num}=${o3_hourly_summary.site_num}
               AND ${wind_hourly_summary.units_of_measure}="Knots"
-              ;;
+    ;;
+  }
+  join: so2_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${wind_hourly_summary.state_name}=${so2_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw}=${so2_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt}=${so2_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name}=${so2_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num}=${so2_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    ;;
+  }
+  join: co_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${wind_hourly_summary.state_name}=${co_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw}=${co_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt}=${co_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name}=${co_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num}=${co_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    ;;
+  }
+  join: no2_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${wind_hourly_summary.state_name}=${no2_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw}=${no2_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt}=${no2_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name}=${no2_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num}=${no2_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    ;;
   }
 }
 
 #
-explore: o3_hourly_summary {}
 #   label: "Criteria Gases"
 #   join: so2_hourly_summary {
 #     type: left_outer
