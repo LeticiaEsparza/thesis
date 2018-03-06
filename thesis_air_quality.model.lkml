@@ -23,7 +23,7 @@ explore: wind_hourly_summary {
     type: inner
     relationship: one_to_one
     sql_on: ${wind_hourly_summary.state_name}=${o3_hourly_summary.state_name}
-              AND ${o3_hourly_summary.date_gmt_raw}=${wind_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.date_gmt_raw}=${o3_hourly_summary.date_gmt_raw}
               AND ${wind_hourly_summary.time_gmt}=${o3_hourly_summary.time_gmt}
               AND ${wind_hourly_summary.county_name}=${o3_hourly_summary.county_name}
               AND ${wind_hourly_summary.site_num}=${o3_hourly_summary.site_num}
