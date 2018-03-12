@@ -2,6 +2,7 @@ view: wind_hourly_summary {
   sql_table_name: looker_scratch.wind_hourly_summary ;;
 
   dimension: wind_key {
+    primary_key: yes
     hidden: yes
     type: string
     sql: CONCAT(${state_name}, CAST(${date_gmt_raw} AS string), ${time_gmt}, ${county_name}, CAST(${site_num} AS string)) ;;
@@ -169,9 +170,59 @@ view: wind_hourly_summary {
     drill_fields: [parameter_name, county_name, method_name, state_name]
   }
 
-  measure: avg {
+
+  #measures for sample measurement
+  measure: avg_sample_measurement {
     type: average
     sql: ${TABLE}.sample_measurement ;;
   }
+
+  measure: sum_sample_measurement{
+    type: sum
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  # returns the midpoint value for the values in a given field
+  measure: median_sample_measurement{
+    type: median
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: max_sample_measurement{
+    type: max
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: min_sample_measurement{
+    type: min
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_25_percentile{
+    type: percentile
+    percentile: 25
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_50_percentile{
+    type: percentile
+    percentile: 50
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_75_percentile{
+    type: percentile
+    percentile: 75
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_90_percentile{
+    type: percentile
+    percentile: 90
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  # measures end
+
 
 }

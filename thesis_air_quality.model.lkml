@@ -119,21 +119,36 @@ explore: no2_hourly_summary {
 # explore: o3_hourly_summary {}
 #
 # explore: pm10_daily_summary {}
+explore: pm10_hourly_summary {}
 
 # Particulates
 #
-explore: pm10_hourly_summary {
+explore: pressure_and_particulates {
+  view_name: pressure_hourly_summary
+  join:  pm10_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${pressure_hourly_summary.county_code} = ${pm10_hourly_summary.county_code}
+        AND ${pressure_hourly_summary.state_code} = ${pm10_hourly_summary.state_code}
+        AND ${pressure_hourly_summary.site_num} = ${pm10_hourly_summary.site_num}
+        AND ${pressure_hourly_summary.date_gmt_raw} = ${pm10_hourly_summary.date_gmt_raw}
+        AND ${pressure_hourly_summary.time_gmt} = ${pm10_hourly_summary.time_gmt};;
+#         AND ${pressure_hourly_summary.poc} = ${pm10_hourly_summary.poc}
+#         AND ${pressure_hourly_summary.parameter_code} = ${pm10_hourly_summary.parameter_code}
+
+
+  }
   join: pm25_speciation_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${pm10_hourly_summary.county_code} = ${pm25_speciation_hourly_summary.county_code}
-        AND ${pm10_hourly_summary.state_code} = ${pm25_speciation_hourly_summary.state_code}
-        AND ${pm10_hourly_summary.site_num} = ${pm25_speciation_hourly_summary.site_num}
-        AND ${pm10_hourly_summary.date_gmt_raw} = ${pm25_speciation_hourly_summary.date_gmt_raw}
-        AND ${pm10_hourly_summary.time_gmt} = ${pm25_speciation_hourly_summary.time_gmt}
-        AND ${pm10_hourly_summary.poc} = ${pm25_speciation_hourly_summary.poc}
-        AND ${pm10_hourly_summary.parameter_code} = ${pm25_speciation_hourly_summary.parameter_code}
-    ;;
+    sql_on: ${pressure_hourly_summary.county_code} = ${pm25_speciation_hourly_summary.county_code}
+        AND ${pressure_hourly_summary.state_code} = ${pm25_speciation_hourly_summary.state_code}
+        AND ${pressure_hourly_summary.site_num} = ${pm25_speciation_hourly_summary.site_num}
+        AND ${pressure_hourly_summary.date_gmt_raw} = ${pm25_speciation_hourly_summary.date_gmt_raw}
+        AND ${pressure_hourly_summary.time_gmt} = ${pm25_speciation_hourly_summary.time_gmt};;
+#         AND ${pressure_hourly_summary.poc} = ${pm25_speciation_hourly_summary.poc}
+#         AND ${pressure_hourly_summary.parameter_code} = ${pm25_speciation_hourly_summary.parameter_code}
+
   }
 }
 #
@@ -151,7 +166,7 @@ explore: pm25_speciation_hourly_summary {}
 
 # explore: pressure_daily_summary {}
 #
-# explore: pressure_hourly_summary {}
+explore: pressure_hourly_summary {}
 #
 # explore: rh_and_dp_daily_summary {}
 #
