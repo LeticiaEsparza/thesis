@@ -1,6 +1,12 @@
 view: wind_hourly_summary {
   sql_table_name: looker_scratch.wind_hourly_summary ;;
 
+  dimension: wind_key {
+    hidden: yes
+    type: string
+    sql: CONCAT(${state_name}, CAST(${date_gmt_raw} AS string), ${time_gmt}, ${county_name}, CAST(${site_num} AS string)) ;;
+  }
+
   dimension: county_code {
     type: string
     sql: ${TABLE}.county_code ;;

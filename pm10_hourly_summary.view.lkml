@@ -1,6 +1,12 @@
 view: pm10_hourly_summary {
   sql_table_name: looker_scratch.pm10_hourly_summary ;;
 
+dimension: pm10_key {
+  hidden: yes
+  type: string
+  sql:  CONCAT(${county_code}," ",${state_code}," ",${site_num}," ",CAST(${date_gmt_raw} AS string)," ",${time_gmt}," ",CAST(${poc} AS string)," ", CAST(${parameter_code} AS string) );;
+}
+
   dimension: county_code {
     type: string
     sql: ${TABLE}.county_code ;;

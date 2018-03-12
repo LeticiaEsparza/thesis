@@ -22,45 +22,45 @@ explore: wind_hourly_summary {
   join: o3_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${wind_hourly_summary.state_name}=${o3_hourly_summary.state_name}
-              AND ${wind_hourly_summary.date_gmt_raw}=${o3_hourly_summary.date_gmt_raw}
-              AND ${wind_hourly_summary.time_gmt}=${o3_hourly_summary.time_gmt}
-              AND ${wind_hourly_summary.county_name}=${o3_hourly_summary.county_name}
-              AND ${wind_hourly_summary.site_num}=${o3_hourly_summary.site_num}
-              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    sql_on: ${wind_hourly_summary.state_name} = ${o3_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw} = ${o3_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt} = ${o3_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name} = ${o3_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num} = ${o3_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure} = "Knots"
     ;;
   }
   join: so2_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${wind_hourly_summary.state_name}=${so2_hourly_summary.state_name}
-              AND ${wind_hourly_summary.date_gmt_raw}=${so2_hourly_summary.date_gmt_raw}
-              AND ${wind_hourly_summary.time_gmt}=${so2_hourly_summary.time_gmt}
-              AND ${wind_hourly_summary.county_name}=${so2_hourly_summary.county_name}
-              AND ${wind_hourly_summary.site_num}=${so2_hourly_summary.site_num}
-              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    sql_on: ${wind_hourly_summary.state_name} = ${so2_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw} = ${so2_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt} = ${so2_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name} = ${so2_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num} = ${so2_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure} = "Knots"
     ;;
   }
   join: co_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${wind_hourly_summary.state_name}=${co_hourly_summary.state_name}
-              AND ${wind_hourly_summary.date_gmt_raw}=${co_hourly_summary.date_gmt_raw}
-              AND ${wind_hourly_summary.time_gmt}=${co_hourly_summary.time_gmt}
-              AND ${wind_hourly_summary.county_name}=${co_hourly_summary.county_name}
-              AND ${wind_hourly_summary.site_num}=${co_hourly_summary.site_num}
-              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    sql_on: ${wind_hourly_summary.state_name} = ${co_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw} = ${co_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt} = ${co_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name} = ${co_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num} = ${co_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure} = "Knots"
     ;;
   }
   join: no2_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${wind_hourly_summary.state_name}=${no2_hourly_summary.state_name}
-              AND ${wind_hourly_summary.date_gmt_raw}=${no2_hourly_summary.date_gmt_raw}
-              AND ${wind_hourly_summary.time_gmt}=${no2_hourly_summary.time_gmt}
-              AND ${wind_hourly_summary.county_name}=${no2_hourly_summary.county_name}
-              AND ${wind_hourly_summary.site_num}=${no2_hourly_summary.site_num}
-              AND ${wind_hourly_summary.units_of_measure}="Knots"
+    sql_on: ${wind_hourly_summary.state_name} = ${no2_hourly_summary.state_name}
+              AND ${wind_hourly_summary.date_gmt_raw} = ${no2_hourly_summary.date_gmt_raw}
+              AND ${wind_hourly_summary.time_gmt} = ${no2_hourly_summary.time_gmt}
+              AND ${wind_hourly_summary.county_name} = ${no2_hourly_summary.county_name}
+              AND ${wind_hourly_summary.site_num} = ${no2_hourly_summary.site_num}
+              AND ${wind_hourly_summary.units_of_measure} = "Knots"
     ;;
   }
 }
@@ -119,8 +119,23 @@ explore: no2_hourly_summary {
 # explore: o3_hourly_summary {}
 #
 # explore: pm10_daily_summary {}
+
+# Particulates
 #
-# explore: pm10_hourly_summary {}
+explore: pm10_hourly_summary {
+  join: pm25_speciation_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${pm10_hourly_summary.county_code} = ${pm25_speciation_hourly_summary.county_code}
+        AND ${pm10_hourly_summary.state_code} = ${pm25_speciation_hourly_summary.state_code}
+        AND ${pm10_hourly_summary.site_num} = ${pm25_speciation_hourly_summary.site_num}
+        AND ${pm10_hourly_summary.date_gmt_raw} = ${pm25_speciation_hourly_summary.date_gmt_raw}
+        AND ${pm10_hourly_summary.time_gmt} = ${pm25_speciation_hourly_summary.time_gmt}
+        AND ${pm10_hourly_summary.poc} = ${pm25_speciation_hourly_summary.poc}
+        AND ${pm10_hourly_summary.parameter_code} = ${pm25_speciation_hourly_summary.parameter_code}
+    ;;
+  }
+}
 #
 # explore: pm25_frm_daily_summary {}
 #
@@ -132,8 +147,8 @@ explore: no2_hourly_summary {
 #
 # explore: pm25_speciation_daily_summary {}
 #
-# explore: pm25_speciation_hourly_summary {}
-#
+explore: pm25_speciation_hourly_summary {}
+
 # explore: pressure_daily_summary {}
 #
 # explore: pressure_hourly_summary {}
