@@ -96,6 +96,11 @@ explore: co_hourly_summary {
 explore: no2_hourly_summary {
 
 }
+
+# union all for particulates and then partition
+# partition keys for time_gmt
+# create flag for union all
+
 # explore: co_daily_summary {}
 #
 # explore: co_hourly_summary {}
@@ -167,6 +172,8 @@ explore: pm25_speciation_hourly_summary {}
 # explore: pressure_daily_summary {}
 #
 explore: pressure_hourly_summary {}
+
+explore: o3_hourly_summary {}
 #
 # explore: rh_and_dp_daily_summary {}
 #
