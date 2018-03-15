@@ -16,6 +16,7 @@ explore:  air_quality_annual_summary{}
 # Criteria Gases: Carbon monoxide (CO); Ground-level Ozone (O3); Nitrogen Dioxide (NO2); Sulfur Dioxide (SO2)
 # Toxics: Lead (Pb); Hazardous Air Pollutants (HAPs); Nitrous Oxides (NONOxNOy); Volatile Organic Compounds (VOCs)
 
+explore: all_particulates {}
 
 explore: wind_hourly_summary {
   label: "Wind and Criteria Gases"
