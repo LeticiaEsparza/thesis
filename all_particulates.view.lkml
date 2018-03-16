@@ -87,7 +87,7 @@ dimension: key {
 
   dimension: time_gmt {
     type: string
-    sql: CAST(${TABLE}.time_gmt AS TIMESTAMP)  ;;
+    sql: ${TABLE}.time_gmt  ;;
   }
 
   dimension: sample_measurement {

@@ -133,12 +133,43 @@ explore: all_particulates {
   join: wind_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${all_particulates.state_code} = ${wind_hourly_summary.county_code}
+    sql_on: ${all_particulates.state_code} = ${wind_hourly_summary.state_code}
         AND ${all_particulates.county_code} = ${wind_hourly_summary.county_code}
         AND ${all_particulates.site_num} = ${wind_hourly_summary.site_num}
         AND ${all_particulates.date_gmt_raw} = ${wind_hourly_summary.date_gmt_raw}
         AND ${all_particulates.time_gmt} = ${wind_hourly_summary.time_gmt}
         AND ${wind_hourly_summary.units_of_measure} = "Knots"
+    ;;
+  }
+  join: temperature_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${temperature_hourly_summary.state_code}
+        AND ${all_particulates.county_code} = ${temperature_hourly_summary.county_code}
+        AND ${all_particulates.site_num} = ${temperature_hourly_summary.site_num}
+        AND ${all_particulates.date_gmt_raw} = ${temperature_hourly_summary.date_gmt_raw}
+        AND ${all_particulates.time_gmt} = ${temperature_hourly_summary.time_gmt}
+    ;;
+  }
+  join: pressure_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${pressure_hourly_summary.state_code}
+        AND ${all_particulates.county_code} = ${pressure_hourly_summary.county_code}
+        AND ${all_particulates.site_num} = ${pressure_hourly_summary.site_num}
+        AND ${all_particulates.date_gmt_raw} = ${pressure_hourly_summary.date_gmt_raw}
+        AND ${all_particulates.time_gmt} = ${pressure_hourly_summary.time_gmt}
+    ;;
+  }
+  join: rh_and_dp_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${rh_and_dp_hourly_summary.state_code}
+        AND ${all_particulates.county_code} = ${rh_and_dp_hourly_summary.county_code}
+        AND ${all_particulates.site_num} = ${rh_and_dp_hourly_summary.site_num}
+        AND ${all_particulates.date_gmt_raw} = ${rh_and_dp_hourly_summary.date_gmt_raw}
+        AND ${all_particulates.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
+
     ;;
   }
 }
