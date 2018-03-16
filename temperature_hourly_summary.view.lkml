@@ -165,6 +165,7 @@ view: temperature_hourly_summary {
   measure: avg_sample_measurement {
     type: average
     sql: ${TABLE}.sample_measurement ;;
+    value_format: "0.##"
   }
 
   measure: sum_sample_measurement{
