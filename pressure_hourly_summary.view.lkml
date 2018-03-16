@@ -1,7 +1,7 @@
 view: pressure_hourly_summary {
   sql_table_name: looker_scratch.pressure_hourly_summary ;;
 
-dimension: pressure_key {
+dimension: key {
   primary_key: yes
   hidden: yes
   type: string

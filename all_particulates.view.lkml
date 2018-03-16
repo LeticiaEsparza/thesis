@@ -6,6 +6,13 @@ view: all_particulates {
        ;;
   }
 
+dimension: key {
+  hidden: no
+  type: string
+  sql: CONCAT(${state_code}," ",${county_code}," ",${site_num},CAST(${date_gmt_date} AS string)," ",${time_gmt}," ", CAST(${poc} AS string)," ",CAST(${parameter_code} AS string)) ;;
+
+
+}
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -27,12 +34,12 @@ view: all_particulates {
   }
 
   dimension: parameter_code {
-    type: string
+    type: number
     sql: ${TABLE}.parameter_code ;;
   }
 
   dimension: poc {
-    type: string
+    type: number
     sql: ${TABLE}.poc ;;
   }
 
@@ -66,8 +73,10 @@ view: all_particulates {
     sql: ${TABLE}.time_local ;;
   }
 
-  dimension: date_gmt {
-    type: date
+  dimension_group: date_gmt {
+    type: time
+    datatype: datetime
+    timeframes: [raw,date,time,year,week,month,quarter]
     sql: ${TABLE}.date_gmt ;;
   }
 
@@ -77,7 +86,7 @@ view: all_particulates {
   }
 
   dimension: sample_measurement {
-    type: string
+    type: number
     sql: ${TABLE}.sample_measurement ;;
   }
 
@@ -137,6 +146,59 @@ view: all_particulates {
     sql_longitude: ${TABLE}.longitude ;;
   }
 
+  #measures for sample measurement
+  measure: avg_sample_measurement {
+    type: average
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sum_sample_measurement{
+    type: sum
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  # returns the midpoint value for the values in a given field
+  measure: median_sample_measurement{
+    type: median
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: max_sample_measurement{
+    type: max
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: min_sample_measurement{
+    type: min
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_25_percentile{
+    type: percentile
+    percentile: 25
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_50_percentile{
+    type: percentile
+    percentile: 50
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_75_percentile{
+    type: percentile
+    percentile: 75
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  measure: sample_measurement_90_percentile{
+    type: percentile
+    percentile: 90
+    sql: ${TABLE}.sample_measurement ;;
+  }
+
+  # measures end
+
   set: detail {
     fields: [
       state_code,
@@ -150,7 +212,6 @@ view: all_particulates {
       parameter_name,
       date_local,
       time_local,
-      date_gmt,
       time_gmt,
       sample_measurement,
       units_of_measure,

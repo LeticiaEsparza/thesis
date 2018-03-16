@@ -5,7 +5,8 @@ view: wind_hourly_summary {
     primary_key: yes
     hidden: yes
     type: string
-    sql: CONCAT(${state_name}, CAST(${date_gmt_raw} AS string), ${time_gmt}, ${county_name}, CAST(${site_num} AS string)) ;;
+    sql: CONCAT(${state_name}," ",CAST(${date_gmt_raw} AS string)," ", ${time_gmt}," ", ${county_name}," ",CAST(${site_num} AS string),
+    "",CAST(${parameter_code} AS string)," ",CAST(${poc} AS string)) ;;
   }
 
   dimension: county_code {
