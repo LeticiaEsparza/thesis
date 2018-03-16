@@ -16,7 +16,7 @@ explore:  air_quality_annual_summary{}
 # Criteria Gases: Carbon monoxide (CO); Ground-level Ozone (O3); Nitrogen Dioxide (NO2); Sulfur Dioxide (SO2)
 # Toxics: Lead (Pb); Hazardous Air Pollutants (HAPs); Nitrous Oxides (NONOxNOy); Volatile Organic Compounds (VOCs)
 
-explore: all_particulates {}
+# explore: all_particulates {}
 explore: wind_hourly_summary {}
 # explore: wind_hourly_summary {
 #   label: "Wind and Criteria Gases"
@@ -129,34 +129,22 @@ explore: pm10_hourly_summary {}
 
 # Particulates
 #
-explore: pressure_and_particulates {
-  view_name: pressure_hourly_summary
-  join:  pm10_hourly_summary {
+explore: all_particulates {
+  join: wind_hourly_summary {
     type: inner
     relationship: one_to_one
-    sql_on: ${pressure_hourly_summary.county_code} = ${pm10_hourly_summary.county_code}
-        AND ${pressure_hourly_summary.state_code} = ${pm10_hourly_summary.state_code}
-        AND ${pressure_hourly_summary.site_num} = ${pm10_hourly_summary.site_num}
-        AND ${pressure_hourly_summary.date_gmt_raw} = ${pm10_hourly_summary.date_gmt_raw}
-        AND ${pressure_hourly_summary.time_gmt} = ${pm10_hourly_summary.time_gmt};;
-#         AND ${pressure_hourly_summary.poc} = ${pm10_hourly_summary.poc}
-#         AND ${pressure_hourly_summary.parameter_code} = ${pm10_hourly_summary.parameter_code}
-
-
-  }
-  join: pm25_speciation_hourly_summary {
-    type: inner
-    relationship: one_to_one
-    sql_on: ${pressure_hourly_summary.county_code} = ${pm25_speciation_hourly_summary.county_code}
-        AND ${pressure_hourly_summary.state_code} = ${pm25_speciation_hourly_summary.state_code}
-        AND ${pressure_hourly_summary.site_num} = ${pm25_speciation_hourly_summary.site_num}
-        AND ${pressure_hourly_summary.date_gmt_raw} = ${pm25_speciation_hourly_summary.date_gmt_raw}
-        AND ${pressure_hourly_summary.time_gmt} = ${pm25_speciation_hourly_summary.time_gmt};;
-#         AND ${pressure_hourly_summary.poc} = ${pm25_speciation_hourly_summary.poc}
-#         AND ${pressure_hourly_summary.parameter_code} = ${pm25_speciation_hourly_summary.parameter_code}
-
+    sql_on: ${all_particulates.state_code} = ${wind_hourly_summary.county_code}
+        AND ${all_particulates.county_code} = ${wind_hourly_summary.county_code}
+        AND ${all_particulates.site_num} = ${wind_hourly_summary.site_num}
+        AND ${all_particulates.date_gmt_raw} = ${wind_hourly_summary.date_gmt_raw}
+        AND ${all_particulates.time_gmt} = ${wind_hourly_summary.time_gmt}
+        AND ${wind_hourly_summary.units_of_measure} = "Knots"
+    ;;
   }
 }
+
+
+
 #
 # explore: pm10_hourly_summary {}
 # explore: pm25_frm_daily_summary {}

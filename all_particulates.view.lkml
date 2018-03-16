@@ -4,10 +4,15 @@ view: all_particulates {
       UNION ALL
       SELECT * FROM `future-pager-187318.looker_scratch.pm10_hourly_summary`
        ;;
+
+
+    sql_trigger_value: SELECT current_date;;
+
   }
 
 dimension: key {
-  hidden: no
+  primary_key: yes
+  hidden: yes
   type: string
   sql: CONCAT(${state_code}," ",${county_code}," ",${site_num},CAST(${date_gmt_date} AS string)," ",${time_gmt}," ", CAST(${poc} AS string)," ",CAST(${parameter_code} AS string)) ;;
 
@@ -82,7 +87,7 @@ dimension: key {
 
   dimension: time_gmt {
     type: string
-    sql: ${TABLE}.time_gmt ;;
+    sql: CAST(${TABLE}.time_gmt AS TIMESTAMP)  ;;
   }
 
   dimension: sample_measurement {

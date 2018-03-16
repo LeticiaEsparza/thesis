@@ -3,7 +3,7 @@ view: temperature_hourly_summary {
 
   dimension: key {
     primary_key: yes
-    hidden: no
+    hidden: yes
     type: string
     sql: CONCAT(${state_code},${county_code},${site_num},CAST(${date_gmt_date} AS string),${time_gmt},CAST(${poc} AS string))
     ;;

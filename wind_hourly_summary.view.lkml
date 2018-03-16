@@ -1,7 +1,7 @@
 view: wind_hourly_summary {
   sql_table_name: looker_scratch.wind_hourly_summary ;;
 
-  dimension: wind_key {
+  dimension: key {
     primary_key: yes
     hidden: yes
     type: string
