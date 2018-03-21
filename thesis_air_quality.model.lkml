@@ -175,6 +175,8 @@ explore: all_particulates {
 }
 
 
+explore: all_gases {}
+
 
 #
 # explore: pm10_hourly_summary {}

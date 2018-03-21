@@ -1,23 +1,22 @@
-view: all_particulates {
+view: all_gases {
   derived_table: {
-    sql: SELECT * FROM `future-pager-187318.looker_scratch.pm25_frm_hourly_summary`
+    sql: SELECT * FROM `future-pager-187318.looker_scratch.o3_hourly_summary`
       UNION ALL
-      SELECT * FROM `future-pager-187318.looker_scratch.pm10_hourly_summary`
+      SELECT * FROM `future-pager-187318.looker_scratch.co_hourly_summary`
+      UNION ALL
+      SELECT * FROM `future-pager-187318.looker_scratch.no2_hourly_summary`
+      UNION ALL
+      SELECT * FROM `future-pager-187318.looker_scratch.so2_hourly_summary`
        ;;
-
-
     sql_trigger_value: SELECT CURRENT_DATE();;
 
   }
 
-dimension: key {
-  primary_key: yes
-  hidden: yes
-  type: string
-  sql: CONCAT(${state_code}," ",${county_code}," ",${site_num},CAST(${date_gmt_date} AS string)," ",${time_gmt}," ", CAST(${poc} AS string)," ",CAST(${parameter_code} AS string)) ;;
+# dimension: key {
+#   type: string
+#   sql: CONCAT() ;;
+# }
 
-
-}
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -39,12 +38,12 @@ dimension: key {
   }
 
   dimension: parameter_code {
-    type: number
+    type: string
     sql: ${TABLE}.parameter_code ;;
   }
 
   dimension: poc {
-    type: number
+    type: string
     sql: ${TABLE}.poc ;;
   }
 
@@ -78,6 +77,11 @@ dimension: key {
     sql: ${TABLE}.time_local ;;
   }
 
+#   dimension: date_gmt {
+#     type: date
+#     sql: ${TABLE}.date_gmt ;;
+#   }
+
   dimension_group: date_gmt {
     type: time
     datatype: datetime
@@ -87,11 +91,11 @@ dimension: key {
 
   dimension: time_gmt {
     type: string
-    sql: ${TABLE}.time_gmt  ;;
+    sql: ${TABLE}.time_gmt ;;
   }
 
   dimension: sample_measurement {
-    type: number
+    type: string
     sql: ${TABLE}.sample_measurement ;;
   }
 
@@ -150,60 +154,6 @@ dimension: key {
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
   }
-
-  #measures for sample measurement
-  measure: avg_sample_measurement {
-    type: average
-    sql: ${TABLE}.sample_measurement ;;
-    value_format: "0.##"
-  }
-
-  measure: sum_sample_measurement{
-    type: sum
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  # returns the midpoint value for the values in a given field
-  measure: median_sample_measurement{
-    type: median
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: max_sample_measurement{
-    type: max
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: min_sample_measurement{
-    type: min
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: sample_measurement_25_percentile{
-    type: percentile
-    percentile: 25
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: sample_measurement_50_percentile{
-    type: percentile
-    percentile: 50
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: sample_measurement_75_percentile{
-    type: percentile
-    percentile: 75
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  measure: sample_measurement_90_percentile{
-    type: percentile
-    percentile: 90
-    sql: ${TABLE}.sample_measurement ;;
-  }
-
-  # measures end
 
   set: detail {
     fields: [
