@@ -12,10 +12,12 @@ view: all_gases {
 
   }
 
-# dimension: key {
-#   type: string
-#   sql: CONCAT() ;;
-# }
+  dimension: key {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: CONCAT(${state_code}," ",${county_code}," ",${site_num},CAST(${date_gmt_date} AS string)," ",${time_gmt}," ", CAST(${poc} AS string)," ",CAST(${parameter_code} AS string)) ;;
+  }
 
   measure: count {
     type: count

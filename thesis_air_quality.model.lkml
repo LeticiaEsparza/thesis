@@ -175,7 +175,50 @@ explore: all_particulates {
 }
 
 
-explore: all_gases {}
+explore: all_gases {
+  join: wind_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_gases.state_code} = ${wind_hourly_summary.state_code}
+        AND ${all_gases.county_code} = ${wind_hourly_summary.county_code}
+        AND ${all_gases.site_num} = ${wind_hourly_summary.site_num}
+        AND ${all_gases.date_gmt_raw} = ${wind_hourly_summary.date_gmt_raw}
+        AND ${all_gases.time_gmt} = ${wind_hourly_summary.time_gmt}
+        AND ${all_gases.units_of_measure} = "Knots"
+    ;;
+  }
+  join: temperature_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_gases.state_code} = ${temperature_hourly_summary.state_code}
+        AND ${all_gases.county_code} = ${temperature_hourly_summary.county_code}
+        AND ${all_gases.site_num} = ${temperature_hourly_summary.site_num}
+        AND ${all_gases.date_gmt_raw} = ${temperature_hourly_summary.date_gmt_raw}
+        AND ${all_gases.time_gmt} = ${temperature_hourly_summary.time_gmt}
+    ;;
+  }
+  join: pressure_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_gases.state_code} = ${pressure_hourly_summary.state_code}
+        AND ${all_gases.county_code} = ${pressure_hourly_summary.county_code}
+        AND ${all_gases.site_num} = ${pressure_hourly_summary.site_num}
+        AND ${all_gases.date_gmt_raw} = ${pressure_hourly_summary.date_gmt_raw}
+        AND ${all_gases.time_gmt} = ${pressure_hourly_summary.time_gmt}
+    ;;
+  }
+  join: rh_and_dp_hourly_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_gases.state_code} = ${rh_and_dp_hourly_summary.state_code}
+        AND ${all_gases.county_code} = ${rh_and_dp_hourly_summary.county_code}
+        AND ${all_gases.site_num} = ${rh_and_dp_hourly_summary.site_num}
+        AND ${all_gases.date_gmt_raw} = ${rh_and_dp_hourly_summary.date_gmt_raw}
+        AND ${all_gases.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
+
+    ;;
+  }
+}
 
 
 #

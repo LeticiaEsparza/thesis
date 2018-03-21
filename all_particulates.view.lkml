@@ -15,9 +15,8 @@ dimension: key {
   hidden: yes
   type: string
   sql: CONCAT(${state_code}," ",${county_code}," ",${site_num},CAST(${date_gmt_date} AS string)," ",${time_gmt}," ", CAST(${poc} AS string)," ",CAST(${parameter_code} AS string)) ;;
-
-
 }
+
   measure: count {
     type: count
     drill_fields: [detail*]
