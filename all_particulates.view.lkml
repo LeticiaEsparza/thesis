@@ -67,8 +67,18 @@ dimension: key {
     sql: ${TABLE}.parameter_name ;;
   }
 
-  dimension: date_local {
-    type: date
+  dimension_group: date_local {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.date_local ;;
   }
 
@@ -215,7 +225,6 @@ dimension: key {
       longitude,
       datum,
       parameter_name,
-      date_local,
       time_local,
       time_gmt,
       sample_measurement,

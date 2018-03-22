@@ -1,6 +1,13 @@
 view: pm10_daily_summary {
   sql_table_name: looker_scratch.pm10_daily_summary ;;
 
+  dimension: key {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: CONCAT(${state_code}," ",${county_code}," ",${site_num}," ",CAST(${date_local_date} AS string)," ", ${event_type}," ",CAST(${poc} AS string)," ",CAST(${method_code} AS string)) ;;
+  }
+
   dimension: address {
     type: string
     sql: ${TABLE}.address ;;
@@ -9,6 +16,30 @@ view: pm10_daily_summary {
   dimension: aqi {
     type: number
     sql: ${TABLE}.aqi ;;
+    html:
+        {% if value >= 0 and value <= 50 %}
+          <div style="background-color:#00E400">{{ rendered_value }}</div>
+        {% elsif value >= 51 and value <= 100  %}
+          <div style="background-color:#FFFF00">{{ rendered_value }}</div>
+        {% elsif value >= 101 and value <= 150  %}
+          <div style="background-color:#FF7E00">{{ rendered_value }}</div>
+        {% elsif value >= 151 and value <= 200  %}
+          <div style="background-color:#FF0000">{{ rendered_value }}</div>
+        {% elsif value >= 201 and value <= 300  %}
+          <div style="background-color:#8F3F97">{{ rendered_value }}</div>
+        {% else %}
+          <div style="background-color:#7E0023">{{ rendered_value }}</div>
+        {% endif %}
+    ;;
+
+#     html:
+#     {% if value > 100 %}
+#       <font color="darkgreen">{{ rendered_value }}</font>
+#     {% elsif value > 50 %}
+#       <font color="goldenrod">{{ rendered_value }}</font>
+#     {% else %}
+#       <font color="darkred">{{ rendered_value }}</font>
+#     {% endif %} ;;
   }
 
   dimension: arithmetic_mean {
@@ -170,6 +201,7 @@ view: pm10_daily_summary {
     type: count
     drill_fields: [detail*]
   }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {

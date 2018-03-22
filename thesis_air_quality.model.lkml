@@ -31,6 +31,8 @@ explore: no2_hourly_summary {
 
 }
 
+explore: pm10_daily_summary {}
+explore: pm25_frm_daily_summary {}
 # union all for particulates and then partition
 # partition keys for time_gmt
 # create flag for union all
@@ -53,10 +55,10 @@ explore: no2_hourly_summary {
 #
 # explore: nonoxnoy_hourly_summary {}
 #
-# explore: o3_daily_summary {}
+explore: o3_daily_summary {}
 #
 # explore: o3_hourly_summary {}
-#
+
 # explore: pm10_daily_summary {}
 explore: pm10_hourly_summary {}
 
@@ -102,9 +104,27 @@ explore: all_particulates {
         AND ${all_particulates.site_num} = ${rh_and_dp_hourly_summary.site_num}
         AND ${all_particulates.date_gmt_raw} = ${rh_and_dp_hourly_summary.date_gmt_raw}
         AND ${all_particulates.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
-
     ;;
   }
+  join: pm10_daily_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${pm10_daily_summary.state_code}
+          AND ${all_particulates.county_code} = ${pm10_daily_summary.county_code}
+          AND ${all_particulates.site_num} = ${pm10_daily_summary.site_num}
+          AND ${all_particulates.date_local_raw} = ${pm10_daily_summary.date_local_raw}
+          ;;
+  }
+  join: pm25_frm_daily_summary {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${pm25_frm_daily_summary.state_code}
+          AND ${all_particulates.county_code} = ${pm25_frm_daily_summary.county_code}
+          AND ${all_particulates.site_num} = ${pm25_frm_daily_summary.site_num}
+          AND ${all_particulates.date_local_raw} = ${pm25_frm_daily_summary.date_local_raw}
+          ;;
+  }
+
 }
 
 explore: all_gases {
@@ -147,7 +167,6 @@ explore: all_gases {
         AND ${all_gases.site_num} = ${rh_and_dp_hourly_summary.site_num}
         AND ${all_gases.date_gmt_raw} = ${rh_and_dp_hourly_summary.date_gmt_raw}
         AND ${all_gases.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
-
     ;;
   }
 }

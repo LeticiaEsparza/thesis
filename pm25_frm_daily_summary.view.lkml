@@ -1,6 +1,14 @@
 view: pm25_frm_daily_summary {
   sql_table_name: looker_scratch.pm25_frm_daily_summary ;;
 
+  dimension: key {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: CONCAT(${state_code}," ",${county_code}," ",${site_num}," ",CAST(${date_local_date} AS string)," ", ${event_type}," ",CAST(${poc} AS string)," ",CAST(${method_code} AS string)) ;;
+  }
+
+
   dimension: address {
     type: string
     sql: ${TABLE}.address ;;
