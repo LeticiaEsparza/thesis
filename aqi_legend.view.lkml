@@ -31,17 +31,17 @@ view: aqi_legend {
     sql: ${TABLE}.levels_of_health_concern ;;
     html:
         {% if value == "Good" %}
-          <div style="background-color:#00E400">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#00E400">{{ rendered_value }}</div></b></center>
         {% elsif value == "Moderate"  %}
-          <div style="background-color:#FFFF00">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
         {% elsif value == "Unhealthy for Sensitive Groups" %}
-          <div style="background-color:#FF7E00">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#FF7E00">{{ rendered_value }}</div></b></center>
         {% elsif value == "Unhealthy"  %}
-          <div style="background-color:#FF0000">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#FF0000">{{ rendered_value }}</div></b></center>
         {% elsif value == "Very Unhealthy"  %}
-          <div style="background-color:#8F3F97">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#8F3F97">{{ rendered_value }}</div></b></center>
         {% else %}
-          <div style="background-color:#7E0023">{{ rendered_value }}</div>
+          <center><b><div style="background-color:#7E0023">{{ rendered_value }}</div></b></center>
         {% endif %}
     ;;
 
@@ -53,17 +53,17 @@ view: aqi_legend {
     sql: ${TABLE}.aqi_values ;;
     html:
         {% if value == "0 to 50" %}
-        <div style="background-color:#00E400">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#00E400">{{ rendered_value }}</div></b></center>
         {% elsif value == "51 to 100"  %}
-        <div style="background-color:#FFFF00">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
         {% elsif value == "101 to 150"  %}
-        <div style="background-color:#FF7E00">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#FF7E00">{{ rendered_value }}</div></b></center>
         {% elsif value == "151 to 200"  %}
-        <div style="background-color:#FF0000">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#FF0000">{{ rendered_value }}</div></b></center>
         {% elsif value == "201 to 300"  %}
-        <div style="background-color:#8F3F97">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#8F3F97">{{ rendered_value }}</div></b></center>
         {% else %}
-        <div style="background-color:#7E0023">{{ rendered_value }}</div>
+        <center><b><div style="background-color:#7E0023">{{ rendered_value }}</div></b></center>
         {% endif %}
         ;;
 }
