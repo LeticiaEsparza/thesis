@@ -19,6 +19,7 @@ view: aqi_legend {
       UNION ALL
       SELECT "Hazardous" AS levels_of_health_concern, "301 to 500" AS aqi_values
        ;;
+    sql_trigger_value: SELECT CURRENT_DATE();;
   }
 
   measure: count {
