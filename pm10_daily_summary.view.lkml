@@ -31,15 +31,6 @@ view: pm10_daily_summary {
           <div style="background-color:#7E0023">{{ rendered_value }}</div>
         {% endif %}
     ;;
-
-#     html:
-#     {% if value > 100 %}
-#       <font color="darkgreen">{{ rendered_value }}</font>
-#     {% elsif value > 50 %}
-#       <font color="goldenrod">{{ rendered_value }}</font>
-#     {% else %}
-#       <font color="darkred">{{ rendered_value }}</font>
-#     {% endif %} ;;
   }
 
   dimension: arithmetic_mean {

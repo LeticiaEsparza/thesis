@@ -6,6 +6,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: aqi_legend {}
 explore: connection_reg_r3 {
   hidden: yes
 }
