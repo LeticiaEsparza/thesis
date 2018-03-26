@@ -1,5 +1,5 @@
 view: connection_reg_r3 {
-  sql_table_name: looker_scratch.connection_reg_r3 ;;
+  sql_table_name: epa_historical_air_quality.connection_reg_r3 ;;
 
   dimension: created_at {
     type: number

@@ -1,5 +1,5 @@
 view: pm25_frm_daily_summary {
-  sql_table_name: looker_scratch.pm25_frm_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.pm25_frm_daily_summary ;;
 
   dimension: key {
     primary_key: yes

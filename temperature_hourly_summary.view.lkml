@@ -1,5 +1,5 @@
 view: temperature_hourly_summary {
-  sql_table_name: looker_scratch.temperature_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.temperature_hourly_summary ;;
 
   dimension: key {
     primary_key: yes

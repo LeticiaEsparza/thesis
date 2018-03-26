@@ -1,5 +1,5 @@
 view: voc_daily_summary {
-  sql_table_name: looker_scratch.voc_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.voc_daily_summary ;;
 
   dimension: address {
     type: string

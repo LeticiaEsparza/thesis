@@ -1,5 +1,5 @@
 view: voc_hourly_summary {
-  sql_table_name: looker_scratch.voc_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.voc_hourly_summary ;;
 
   dimension: county_code {
     type: string

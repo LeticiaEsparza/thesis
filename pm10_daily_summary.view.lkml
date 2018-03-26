@@ -1,5 +1,5 @@
 view: pm10_daily_summary {
-  sql_table_name: looker_scratch.pm10_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.pm10_daily_summary ;;
 
   dimension: key {
     primary_key: yes

@@ -1,5 +1,5 @@
 view: wind_hourly_summary {
-  sql_table_name: looker_scratch.wind_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.wind_hourly_summary ;;
 
   dimension: key {
     primary_key: yes

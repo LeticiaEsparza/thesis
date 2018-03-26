@@ -1,5 +1,5 @@
 view: wind_daily_summary {
-  sql_table_name: looker_scratch.wind_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.wind_daily_summary ;;
 
   dimension: address {
     type: string

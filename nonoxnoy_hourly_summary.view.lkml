@@ -1,5 +1,5 @@
 view: nonoxnoy_hourly_summary {
-  sql_table_name: looker_scratch.nonoxnoy_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.nonoxnoy_hourly_summary ;;
 
   dimension: county_code {
     type: string

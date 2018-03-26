@@ -1,5 +1,5 @@
 view: air_quality_annual_summary {
-  sql_table_name: looker_scratch.air_quality_annual_summary ;;
+  sql_table_name: epa_historical_air_quality.air_quality_annual_summary ;;
 
   dimension: address {
     description: "The approximate street address of the monitoring site."

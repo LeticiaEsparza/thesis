@@ -1,5 +1,5 @@
 view: nonoxnoy_daily_summary {
-  sql_table_name: looker_scratch.nonoxnoy_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.nonoxnoy_daily_summary ;;
 
   dimension: address {
     type: string

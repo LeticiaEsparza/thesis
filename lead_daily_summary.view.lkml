@@ -1,5 +1,5 @@
 view: lead_daily_summary {
-  sql_table_name: looker_scratch.lead_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.lead_daily_summary ;;
 
   dimension: address {
     type: string

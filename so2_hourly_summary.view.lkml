@@ -1,5 +1,5 @@
 view: so2_hourly_summary {
-  sql_table_name: looker_scratch.so2_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.so2_hourly_summary ;;
 
   dimension: so2_key {
     type: string

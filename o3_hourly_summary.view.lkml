@@ -1,6 +1,6 @@
 view: o3_hourly_summary {
   # OZONE
-  sql_table_name: looker_scratch.o3_hourly_summary ;;
+  sql_table_name: epa_historical_air_quality.o3_hourly_summary ;;
 
  dimension: o3_key {
    type: string

@@ -1,5 +1,5 @@
 view: pm25_nonfrm_daily_summary {
-  sql_table_name: looker_scratch.pm25_nonfrm_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.pm25_nonfrm_daily_summary ;;
 
   dimension: address {
     type: string

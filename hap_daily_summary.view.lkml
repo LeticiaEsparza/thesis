@@ -1,5 +1,5 @@
 view: hap_daily_summary {
-  sql_table_name: looker_scratch.hap_daily_summary ;;
+  sql_table_name: epa_historical_air_quality.hap_daily_summary ;;
 
   dimension: address {
     type: string
