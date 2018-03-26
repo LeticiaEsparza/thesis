@@ -1,12 +1,12 @@
 view: all_gases {
   derived_table: {
-    sql: SELECT * FROM `future-pager-187318.looker_scratch.o3_hourly_summary`
+    sql: SELECT * FROM `se-pbl.epa_historical_air_quality.o3_hourly_summary`
       UNION ALL
-      SELECT * FROM `future-pager-187318.looker_scratch.co_hourly_summary`
+      SELECT * FROM `se-pbl.epa_historical_air_quality.co_hourly_summary`
       UNION ALL
-      SELECT * FROM `future-pager-187318.looker_scratch.no2_hourly_summary`
+      SELECT * FROM `se-pbl.epa_historical_air_quality.no2_hourly_summary`
       UNION ALL
-      SELECT * FROM `future-pager-187318.looker_scratch.so2_hourly_summary`
+      SELECT * FROM `se-pbl.epa_historical_air_quality.so2_hourly_summary`
        ;;
     sql_trigger_value: SELECT CURRENT_DATE();;
 

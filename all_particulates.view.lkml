@@ -1,8 +1,8 @@
 view: all_particulates {
   derived_table: {
-    sql: SELECT * FROM `future-pager-187318.looker_scratch.pm25_frm_hourly_summary`
+    sql: SELECT * FROM `se-pbl.epa_historical_air_quality.pm25_frm_hourly_summary`
       UNION ALL
-      SELECT * FROM `future-pager-187318.looker_scratch.pm10_hourly_summary`
+      SELECT * FROM `se-pbl.epa_historical_air_quality.pm10_hourly_summary`
        ;;
 
 
