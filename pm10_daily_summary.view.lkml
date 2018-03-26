@@ -208,6 +208,60 @@ view: pm10_daily_summary {
     drill_fields: [detail*]
   }
 
+  # measures
+  measure: avg_aqi {
+    type: average
+    sql: ${TABLE}.aqi ;;
+    value_format: "0.##"
+  }
+
+  measure: sum_aqi {
+    type: sum
+    sql: ${TABLE}.aqi ;;
+  }
+
+  # returns the midpoint value for the values in a given field
+  measure: median_aqi {
+    type: median
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: max_aqi {
+    type: max
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: min_aqi {
+    type: min
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: aqi_25_percentile{
+    type: percentile
+    percentile: 25
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: aqi_50_percentile{
+    type: percentile
+    percentile: 50
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: aqi_75_percentile{
+    type: percentile
+    percentile: 75
+    sql: ${TABLE}.aqi ;;
+  }
+
+  measure: aqi_90_percentile{
+    type: percentile
+    percentile: 90
+    sql: ${TABLE}.aqi ;;
+  }
+
+  # measures end
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
