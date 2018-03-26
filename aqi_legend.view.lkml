@@ -36,13 +36,13 @@ view: aqi_legend {
         {% elsif value == "Moderate"  %}
           <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
         {% elsif value == "Unhealthy for Sensitive Groups" %}
-          <center><b><div style="background-color:#FF7E00">{{ rendered_value }}</div></b></center>
+          <center><b><div style="background-color:#FF7E00"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% elsif value == "Unhealthy"  %}
-          <center><b><div style="background-color:#FF0000">{{ rendered_value }}</div></b></center>
+          <center><b><div style="background-color:#FF0000"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% elsif value == "Very Unhealthy"  %}
-          <center><b><div style="background-color:#8F3F97">{{ rendered_value }}</div></b></center>
+          <center><b><div style="background-color:#8F3F97"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% else %}
-          <center><b><div style="background-color:#7E0023">{{ rendered_value }}</div></b></center>
+          <center><b><div style="background-color:#7E0023"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% endif %}
     ;;
 
@@ -58,13 +58,13 @@ view: aqi_legend {
         {% elsif value == "51 to 100"  %}
         <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
         {% elsif value == "101 to 150"  %}
-        <center><b><div style="background-color:#FF7E00">{{ rendered_value }}</div></b></center>
+        <center><b><div style="background-color:#FF7E00"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% elsif value == "151 to 200"  %}
-        <center><b><div style="background-color:#FF0000">{{ rendered_value }}</div></b></center>
+        <center><b><div style="background-color:#FF0000"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% elsif value == "201 to 300"  %}
-        <center><b><div style="background-color:#8F3F97">{{ rendered_value }}</div></b></center>
+        <center><b><div style="background-color:#8F3F97"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% else %}
-        <center><b><div style="background-color:#7E0023">{{ rendered_value }}</div></b></center>
+        <center><b><div style="background-color:#7E0023"><font color="white">{{ rendered_value }}</font></div></b></center>
         {% endif %}
         ;;
 }
