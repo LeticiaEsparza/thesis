@@ -107,24 +107,24 @@ explore: all_particulates {
         AND ${all_particulates.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
     ;;
   }
-  join: pm10_daily_summary {
-    type: inner
-    relationship: one_to_one
-    sql_on: ${all_particulates.state_code} = ${pm10_daily_summary.state_code}
-          AND ${all_particulates.county_code} = ${pm10_daily_summary.county_code}
-          AND ${all_particulates.site_num} = ${pm10_daily_summary.site_num}
-          AND ${all_particulates.date_local_raw} = ${pm10_daily_summary.date_local_raw}
-          ;;
-  }
-  join: pm25_frm_daily_summary {
-    type: inner
-    relationship: one_to_one
-    sql_on: ${all_particulates.state_code} = ${pm25_frm_daily_summary.state_code}
-          AND ${all_particulates.county_code} = ${pm25_frm_daily_summary.county_code}
-          AND ${all_particulates.site_num} = ${pm25_frm_daily_summary.site_num}
-          AND ${all_particulates.date_local_raw} = ${pm25_frm_daily_summary.date_local_raw}
-          ;;
-  }
+#   join: pm10_daily_summary {
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: ${all_particulates.state_code} = ${pm10_daily_summary.state_code}
+#           AND ${all_particulates.county_code} = ${pm10_daily_summary.county_code}
+#           AND ${all_particulates.site_num} = ${pm10_daily_summary.site_num}
+#           AND ${all_particulates.date_local_raw} = ${pm10_daily_summary.date_local_raw}
+#           ;;
+#   }
+#   join: pm25_frm_daily_summary {
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: ${all_particulates.state_code} = ${pm25_frm_daily_summary.state_code}
+#           AND ${all_particulates.county_code} = ${pm25_frm_daily_summary.county_code}
+#           AND ${all_particulates.site_num} = ${pm25_frm_daily_summary.site_num}
+#           AND ${all_particulates.date_local_raw} = ${pm25_frm_daily_summary.date_local_raw}
+#           ;;
+#   }
 
 }
 
