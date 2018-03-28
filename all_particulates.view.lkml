@@ -91,7 +91,7 @@ dimension: key {
     type: time
     datatype: datetime
     timeframes: [raw,date,time,year,week,month,quarter]
-    sql: ${TABLE}.date_gmt ;;
+    sql: CAST(${TABLE}.date_gmt AS date);;
   }
 
   dimension: time_gmt {
