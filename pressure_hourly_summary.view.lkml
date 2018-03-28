@@ -30,7 +30,7 @@ dimension: key {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.date_gmt ;;
+    sql: CAST(${TABLE}.date_gmt AS timestamp);;
   }
 
   dimension_group: date_local {
