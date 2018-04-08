@@ -23,10 +23,13 @@ dimension: key {
     timeframes: [
       raw,
       date,
+      time,
+      year,
       week,
       month,
       quarter,
-      year
+      month_num,
+      month_name
     ]
     convert_tz: no
     datatype: date
@@ -121,6 +124,13 @@ dimension: key {
   dimension: sample_measurement {
     type: number
     sql: ${TABLE}.sample_measurement ;;
+  }
+
+  dimension: sample_tier{
+    type: tier
+    tiers: [400,600,700,750,800,850,900,950,1000,1100]
+    style: integer
+    sql: ${sample_measurement} ;;
   }
 
   dimension: site_num {

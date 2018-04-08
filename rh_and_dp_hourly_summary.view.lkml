@@ -24,10 +24,13 @@ view: rh_and_dp_hourly_summary {
     timeframes: [
       raw,
       date,
+      time,
+      year,
       week,
       month,
       quarter,
-      year
+      month_num,
+      month_name
     ]
     convert_tz: no
     datatype: date
@@ -123,6 +126,14 @@ view: rh_and_dp_hourly_summary {
     type: number
     sql: ${TABLE}.sample_measurement ;;
   }
+
+  dimension: sample_tier{
+    type: tier
+    tiers: [10,20,30,40,50,60,70,80,90,100]
+    style: integer
+    sql: ${sample_measurement} ;;
+  }
+
 
   dimension: site_num {
     type: string

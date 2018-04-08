@@ -25,10 +25,13 @@ view: temperature_hourly_summary {
     timeframes: [
       raw,
       date,
+      time,
+      year,
       week,
       month,
       quarter,
-      year
+      month_num,
+      month_name
     ]
     convert_tz: no
     datatype: date
@@ -124,6 +127,14 @@ view: temperature_hourly_summary {
     type: number
     sql: ${TABLE}.sample_measurement ;;
   }
+
+  dimension: sample_tier{
+    type: tier
+    tiers: [-30,-10,10,30,50,70,90,110,130]
+    style: integer
+    sql: ${sample_measurement} ;;
+  }
+
 
   dimension: site_num {
     type: string

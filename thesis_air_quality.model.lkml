@@ -128,6 +128,9 @@ explore: all_particulates {
 
 }
 
+explore: particulates_daily {}
+
+
 explore: all_gases {
   join: wind_hourly_summary {
     type: inner

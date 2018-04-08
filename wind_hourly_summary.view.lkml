@@ -24,10 +24,13 @@ view: wind_hourly_summary {
     timeframes: [
       raw,
       date,
+      time,
+      year,
       week,
       month,
       quarter,
-      year
+      month_num,
+      month_name
     ]
     convert_tz: no
     datatype: date
