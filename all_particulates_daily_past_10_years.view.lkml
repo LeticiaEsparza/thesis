@@ -13,6 +13,14 @@ WHERE (particulates_daily.sample_duration = '24 HOUR') AND ((((particulates_dail
  ;;
   }
 
+dimension: key {
+#   primary_key: yes
+  type: string
+  sql: CONCAT(CAST(${date_local_date} AS string), ${county_name}, CAST(${site_num} AS string), CAST(${method_code} AS string),
+  CAST(${poc} AS string),${city_name}, ${address}, CAST(${aqi} AS string), CAST(${arithmetic_mean} AS string),${cbsa_name}, ${county_code}, ${datum},
+  CAST(${first_max_hour} AS string),CAST(${first_max_value} AS string),${local_site_name}, ${method_name}, ${parameter_name},${pollutant_standard},${state_name},
+  ${event_type}) ;;
+}
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -91,7 +99,7 @@ WHERE (particulates_daily.sample_duration = '24 HOUR') AND ((((particulates_dail
       quarter,
       month_num,
       month_name]
-    sql: ${TABLE}.date_local;;
+    sql: CAST(${TABLE}.date_local AS timestamp);;
 
   }
 
@@ -174,10 +182,27 @@ WHERE (particulates_daily.sample_duration = '24 HOUR') AND ((((particulates_dail
     type: string
     sql: ${TABLE}.cbsa_name ;;
   }
+#
+#   dimension: date_of_last_change {
+#     type: date
+#     sql: ${TABLE}.date_of_last_change ;;
+#   }
 
-  dimension: date_of_last_change {
-    type: date
-    sql: ${TABLE}.date_of_last_change ;;
+  dimension_group: date_of_last_change {
+    type: time
+    datatype: datetime
+    timeframes:
+    [raw,
+      date,
+      time,
+      year,
+      week,
+      month,
+      quarter,
+      month_num,
+      month_name]
+    sql: CAST(${TABLE}.date_of_last_change AS timestamp);;
+
   }
 
   dimension: location {
@@ -215,7 +240,6 @@ WHERE (particulates_daily.sample_duration = '24 HOUR') AND ((((particulates_dail
       county_name,
       city_name,
       cbsa_name,
-      date_of_last_change,
       location
     ]
   }

@@ -176,8 +176,15 @@ explore: all_gases {
   }
 }
 
-explore: all_particulates_daily_past_10_years  {}
-explore: top_n_counties {}
+explore: all_particulates_daily_past_10_years  {
+  label: "Top N Counties in the Past 10 Years"
+  join: top_n_counties {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${all_particulates_daily_past_10_years.county_name} = ${top_n_counties.county_name} ;;
+  }
+}
+# explore: top_n_counties {}
 
 #
 # explore: pm10_hourly_summary {}

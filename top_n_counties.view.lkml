@@ -5,8 +5,8 @@ view: top_n_counties {
       SELECT * FROM `se-pbl.epa_historical_air_quality.pm25_frm_daily_summary`
        )
 SELECT
-  particulates_daily.county_name  AS particulates_daily_county_name,
-  AVG(particulates_daily.aqi ) AS particulates_daily_avg_aqi,
+  particulates_daily.county_name  AS county_name,
+  AVG(particulates_daily.aqi ) AS avg_aqi,
   ROW_NUMBER() OVER (ORDER BY  AVG(particulates_daily.aqi ) DESC) AS RANK
 FROM particulates_daily
 
@@ -27,14 +27,14 @@ ORDER BY 2 DESC
     drill_fields: [detail*]
   }
 
-  dimension: particulates_daily_county_name {
+  dimension: county_name {
     type: string
-    sql: ${TABLE}.particulates_daily_county_name ;;
+    sql: ${TABLE}.county_name ;;
   }
 
-  dimension: particulates_daily_avg_aqi {
+  dimension: avg_aqi {
     type: string
-    sql: ${TABLE}.particulates_daily_avg_aqi ;;
+    sql: ${TABLE}.avg_aqi ;;
   }
 
   dimension: rank_a {
@@ -49,6 +49,6 @@ ORDER BY 2 DESC
   }
 
   set: detail {
-    fields: [particulates_daily_county_name, particulates_daily_avg_aqi, rank]
+    fields: [county_name, avg_aqi, rank]
   }
 }
