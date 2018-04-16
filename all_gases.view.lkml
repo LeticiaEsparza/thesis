@@ -84,11 +84,21 @@ view: all_gases {
 #     sql: ${TABLE}.date_gmt ;;
 #   }
 
+
   dimension_group: date_gmt {
     type: time
     datatype: datetime
-    timeframes: [raw,date,time,year,week,month,quarter]
-    sql: ${TABLE}.date_gmt ;;
+    timeframes:
+    [raw,
+      date,
+      time,
+      year,
+      week,
+      month,
+      quarter,
+      month_num,
+      month_name]
+    sql: CAST(${TABLE}.date_gmt AS timestamp);;
   }
 
   dimension: time_gmt {

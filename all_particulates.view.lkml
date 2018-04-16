@@ -62,9 +62,54 @@ dimension: key {
     sql: ${TABLE}.datum ;;
   }
 
+  parameter: pullutant_type {
+    type: string
+    allowed_value: {
+      label: "PM 10 microns"
+      value: "PM10 Total 0-10um STP"
+    }
+    allowed_value: {
+      label: "PM 2.5 microns"
+      value: "PM2.5 - Local Conditions"
+    }
+
+  }
+
   dimension: parameter_name {
     type: string
     sql: ${TABLE}.parameter_name ;;
+  }
+
+#   dimension: pm10 {
+#     type: string
+#     sql: CASE WHEN ${parameter_name}="PM10 Total 0-10um STP"
+#          THEN "PM10 Total 0-10um STP"
+#          ELSE null
+#         END
+#     ;;
+#   }
+#
+#   dimension: pm25 {
+#     type: string
+#     sql: CASE WHEN ${parameter_name}="PM2.5 - Local Conditions"
+#          THEN "PM2.5 - Local Conditions"
+#          ELSE null
+#         END
+#     ;;
+#   }
+
+  dimension: pollutant_type_name {
+    type: string
+#     sql: ${TABLE}.parameter_name ;;
+    sql:CASE
+         WHEN {% parameter pullutant_type %} = "PM10 Total 0-10um STP" THEN
+           ${parameter_name}= "PM10 Total 0-10um STP"
+         WHEN {% parameter pullutant_type %} = "PM2.5 - Local Conditions" THEN
+           ${parameter_name}= "PM2.5 - Local Conditions"
+         ELSE
+           NULL
+       END ;;
+
   }
 
   dimension_group: date_local {
@@ -101,9 +146,67 @@ dimension: key {
                 month_num,
                 month_name]
     sql: CAST(${TABLE}.date_gmt AS timestamp);;
+    drill_fields: [date_gmt_raw, date_gmt_date,date_gmt_year,date_gmt_month,date_gmt_month_num]
+
   }
 
+  dimension: month_name{
+    type: string
+    sql: ${date_gmt_month_name} ;;
+    link: {
+      label: "Month Dashboard"
+      url: "https://localhost:9999/dashboards/13?&f[all_particulates.date_gmt_month_num]={{ _filters['all_particulates.date_gmt_month_num'] | url_encode }}&f[all_particulates.date_gmt_month]={{ _filters['all_particulates.date_gmt_month'] | url_encode }}&f[all_particulates.parameter_name]={{ _filters['all_particulates.parameter_name'] | url_encode }}"
 
+#       icon_url: "https://looker.com/favicon.ico"
+    }
+  }
+
+# dimension: month {
+#   type: string
+#   sql: ${date_gmt_month};;
+
+#   }
+
+#[Analytic Block] Dynamic Previous Period Analysis using date_start, date_end
+#   filter: previous_period_filter {
+#     type: date
+#     description: "Use this filter for period analysis"
+#   }
+#
+#   dimension: previous_period {
+#     type: string
+#     description: "The reporting period as selected by the Previous Period Filter"
+#     sql:
+#         CASE
+#           WHEN {% date_start previous_period_filter %} IS NOT NULL AND {% date_end previous_period_filter %} IS NOT NULL /* date ranges or in the past x days */
+#             THEN
+#               CASE
+#                 WHEN ${date_gmt_raw} >=  {% date_start previous_period_filter %}
+#                   AND ${date_gmt_raw} <= {% date_end previous_period_filter %}
+#                   THEN 'This Period'
+#                 WHEN ${date_gmt_raw} >= DATE_SUB(DATE_ADD({% date_start previous_period_filter %}, INTERVAL 1 DAY), INTERVAL CAST((-1*DATE_DIFF({% date_start previous_period_filter %}, {% date_end previous_period_filter %},day) + 1) AS INT64 ) DAY )
+#                   AND ${date_gmt_raw} < DATE_SUB({% date_start previous_period_filter %}, INTERVAL 1 DAY)
+#                   -- + 1
+#                   THEN 'Previous Period'
+#               END
+#           WHEN {% date_start previous_period_filter %} IS NULL AND {% date_end previous_period_filter %} IS NULL /* has any value or is not null */
+#             THEN CASE WHEN ${date_gmt_raw} IS NOT NULL THEN 'Has Value' ELSE 'Is Null' END
+#           WHEN {% date_start previous_period_filter %} IS NULL AND {% date_end previous_period_filter %} IS NOT NULL /* on or before */
+#             THEN
+#               CASE
+#                 WHEN  ${date_gmt_raw} <=  {% date_end previous_period_filter %} THEN 'In Period'
+#                 WHEN  ${date_gmt_raw} >   {% date_end previous_period_filter %} THEN 'Not In Period'
+#               END
+#          WHEN {% date_start previous_period_filter %} IS NOT NULL AND {% date_end previous_period_filter %} IS NULL /* on or after */
+#            THEN
+#              CASE
+#                WHEN  ${date_gmt_raw} >= {% date_start previous_period_filter %} THEN 'In Period'
+#                WHEN  ${date_gmt_raw} < {% date_start previous_period_filter %} THEN 'Not In Period'
+#             END
+#         END ;;
+#   }
+
+#END BLOCK
 
   dimension: time_gmt {
     type: string
@@ -113,6 +216,7 @@ dimension: key {
   dimension: sample_measurement {
     type: number
     sql: ${TABLE}.sample_measurement ;;
+
   }
 
   dimension: units_of_measure {
@@ -176,6 +280,7 @@ dimension: key {
     type: average
     sql: ${TABLE}.sample_measurement ;;
     value_format: "0.##"
+    drill_fields: [min_sample_measurement,max_sample_measurement,date_gmt_month]
   }
 
   measure: sum_sample_measurement{
@@ -224,6 +329,8 @@ dimension: key {
   }
 
   # measures end
+
+
 
   set: detail {
     fields: [

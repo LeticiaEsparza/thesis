@@ -126,6 +126,7 @@ explore: all_particulates {
 #           ;;
 #   }
 
+
 }
 
 explore: particulates_daily {}
@@ -175,6 +176,8 @@ explore: all_gases {
   }
 }
 
+explore: all_particulates_daily_past_10_years  {}
+explore: top_n_counties {}
 
 #
 # explore: pm10_hourly_summary {}
@@ -282,3 +285,5 @@ explore: temperature_hourly_summary {}
 #   }
 #
 # }
+#
+# explore: pop_view_1 {}
