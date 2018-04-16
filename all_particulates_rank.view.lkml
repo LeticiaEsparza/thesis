@@ -25,6 +25,11 @@ view: all_particulates_rank {
   measure: count {
     type: count
     drill_fields: [detail*]
+    link: {
+      label: "County Information"
+      url: "https://localhost:9999/dashboards/15?County={{ _filters['all_particulates_rank.county_name'] | url_encode }}&Event%20Status={{ _filters['all_particulates_daily_filtered.event_type'] | url_encode }}"
+    }
+
   }
 
   dimension: county_name {
@@ -32,13 +37,13 @@ view: all_particulates_rank {
     sql: ${TABLE}.county_name ;;
     link: {
       label: "County Information"
-      url: "https://localhost:9999/dashboards/15?County={{ _filters[all_particulates_rank.county_name'] | url_encode }}"
+      url: "https://localhost:9999/dashboards/15?County={{ value }}"
     }
 
-#     link: {
-#       label: "Business Pulse By State Dashboard"
-#       url: "https://learn.looker.com/dashboards/694?State={{ _filters['users.state'] | url_encode }}&Date={{ _filters['orders.date'] | url_encode }}"
-#     }
+    link: {
+      label: "What happened this day?"
+      url: "https://en.wikipedia.org/wiki/October_2007_California_wildfires#{{ rendered_value }}_County"
+    }
   }
 
   dimension: avg_sample_measurement {
