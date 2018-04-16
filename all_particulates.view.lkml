@@ -124,7 +124,7 @@ dimension: key {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.date_local ;;
+    sql: CAST(${TABLE}.date_local AS timestamp) ;;
   }
 
   dimension: time_local {

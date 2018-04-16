@@ -107,23 +107,27 @@ explore: all_particulates {
         AND ${all_particulates.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
     ;;
   }
-#   join: pm10_daily_summary {
+#   join: all_particulates_daily_filtered {
 #     type: inner
 #     relationship: one_to_one
-#     sql_on: ${all_particulates.state_code} = ${pm10_daily_summary.state_code}
-#           AND ${all_particulates.county_code} = ${pm10_daily_summary.county_code}
-#           AND ${all_particulates.site_num} = ${pm10_daily_summary.site_num}
-#           AND ${all_particulates.date_local_raw} = ${pm10_daily_summary.date_local_raw}
+#     sql_on: ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
+#           AND ${all_particulates.county_code} = ${all_particulates_daily_filtered.county_code}
+#           AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
+# --          AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw}
 #           ;;
 #   }
-#   join: pm25_frm_daily_summary {
+#   join: all_particulates_rank {
+#     view_label: "Rank by Sample Measurement"
 #     type: inner
 #     relationship: one_to_one
-#     sql_on: ${all_particulates.state_code} = ${pm25_frm_daily_summary.state_code}
-#           AND ${all_particulates.county_code} = ${pm25_frm_daily_summary.county_code}
-#           AND ${all_particulates.site_num} = ${pm25_frm_daily_summary.site_num}
-#           AND ${all_particulates.date_local_raw} = ${pm25_frm_daily_summary.date_local_raw}
+#     sql_on: ${all_particulates.county_name} = ${all_particulates_rank.county_name}
 #           ;;
+#   }
+#   join: top_n_counties {
+#     view_label: "Rank by AQI"
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: ${all_particulates.county_name} = ${top_n_counties.county_name} ;;
 #   }
 
 
@@ -176,15 +180,57 @@ explore: all_gases {
   }
 }
 
-explore: all_particulates_daily_past_10_years  {
-  label: "Top N Counties in the Past 10 Years"
-  join: top_n_counties {
-    type: inner
-    relationship: one_to_one
-    sql_on: ${all_particulates_daily_past_10_years.county_name} = ${top_n_counties.county_name} ;;
-  }
-}
+# explore: all_particulates_daily_past_10_years  {
+#   label: "Top N Counties in the Past 10 Years"
+#   join: top_n_counties {
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: ${all_particulates_daily_past_10_years.county_name} = ${top_n_counties.county_name} ;;
+#   }
+# }
 # explore: top_n_counties {}
+
+
+
+# explore: all_particulates {
+#   label: "Pollution Rankings"
+#   join: all_particulates_rank{
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: ${all_particulates.county_name} = ${all_particulates_rank.county_name};;
+#   }
+#   join: all_particulates_daily_filtered {
+#     type: inner
+#     relationship: one_to_one
+#     sql_on: all ;;
+#   }
+# }
+#
+#
+explore: all_particulates_daily_filtered {
+  label: "Pollution Rankings"
+join: all_particulates {
+  type: inner
+  relationship: one_to_one
+    sql_on: ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
+           AND ${all_particulates.county_code} = ${all_particulates_daily_filtered.county_code}
+           AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
+           AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw};;
+ }
+join: all_particulates_rank {
+  view_label: "Rank by Sample Measurement"
+  type: inner
+  relationship: one_to_one
+  sql_on: ${all_particulates_daily_filtered.county_name} = ${all_particulates_rank.county_name}
+    ;;
+}
+join: top_n_counties {
+  view_label: "Rank by AQI"
+  type: inner
+  relationship: one_to_one
+  sql_on: ${all_particulates_daily_filtered.county_name} = ${top_n_counties.county_name} ;;
+}
+}
 
 #
 # explore: pm10_hourly_summary {}
@@ -216,7 +262,7 @@ explore: rh_and_dp_hourly_summary {}
 #
 # explore: temperature_daily_summary {}
 #
-explore: temperature_hourly_summary {}
+# explore: temperature_hourly_summary {}
 #
 # explore: voc_daily_summary {}
 #
