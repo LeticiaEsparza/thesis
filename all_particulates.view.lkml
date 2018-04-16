@@ -262,6 +262,10 @@ dimension: key {
   dimension: county_name {
     type: string
     sql: ${TABLE}.county_name ;;
+    link: {
+      label: "County Information"
+      url: "https://localhost:9999/dashboards/15?County={{ _filters[all_particulates_rank.county_name'] | url_encode }}"
+    }
   }
 
   dimension: date_of_last_change {

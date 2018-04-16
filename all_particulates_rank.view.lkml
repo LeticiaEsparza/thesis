@@ -30,16 +30,23 @@ view: all_particulates_rank {
   dimension: county_name {
     type: string
     sql: ${TABLE}.county_name ;;
+    link: {
+      label: "County Information"
+      url: "https://localhost:9999/dashboards/15?County={{ _filters[all_particulates_rank.county_name'] | url_encode }}"
+    }
+
+#     link: {
+#       label: "Business Pulse By State Dashboard"
+#       url: "https://learn.looker.com/dashboards/694?State={{ _filters['users.state'] | url_encode }}&Date={{ _filters['orders.date'] | url_encode }}"
+#     }
   }
 
   dimension: avg_sample_measurement {
-    hidden: yes
     type: string
     sql: ${TABLE}.avg_sample_measurement ;;
   }
 
   dimension: avg_num {
-    hidden: yes
     type: number
     sql: ${TABLE}.avg_sample_measurement ;;
   }

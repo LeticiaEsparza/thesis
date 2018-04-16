@@ -212,10 +212,12 @@ explore: all_particulates_daily_filtered {
 join: all_particulates {
   type: inner
   relationship: one_to_one
-    sql_on: ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
-           AND ${all_particulates.county_code} = ${all_particulates_daily_filtered.county_code}
-           AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
-           AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw};;
+    sql_on:
+--            ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
+                ${all_particulates.county_name} = ${all_particulates_daily_filtered.county_name}
+--            AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
+            AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw}
+;;
  }
 join: all_particulates_rank {
   view_label: "Rank by Sample Measurement"
