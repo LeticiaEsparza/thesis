@@ -41,8 +41,12 @@ view: all_particulates_rank {
     }
 
     link: {
-      label: "What happened this day?"
+      label: "What happened in CA in 2007?"
       url: "https://en.wikipedia.org/wiki/October_2007_California_wildfires#{{ rendered_value }}_County"
+    }
+    link: {
+      label: "Landing Page for US Natural Disasters"
+      url: "https://en.wikipedia.org/wiki/List_of_natural_disasters_in_the_United_States"
     }
   }
 

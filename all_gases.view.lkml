@@ -171,6 +171,7 @@ view: all_gases {
   measure: avg_sample_measurement {
     type: average
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
     value_format: "0.##"
   }
 
@@ -183,40 +184,47 @@ view: all_gases {
   measure: median_sample_measurement{
     type: median
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: max_sample_measurement{
     type: max
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: min_sample_measurement{
     type: min
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_25_percentile{
     type: percentile
     percentile: 25
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_50_percentile{
     type: percentile
     percentile: 50
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_75_percentile{
     type: percentile
     percentile: 75
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_90_percentile{
     type: percentile
     percentile: 90
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   # measures end

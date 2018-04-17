@@ -161,6 +161,7 @@ dimension: key {
     }
   }
 
+
 # dimension: month {
 #   type: string
 #   sql: ${date_gmt_month};;
@@ -284,52 +285,106 @@ dimension: key {
     type: average
     sql: ${TABLE}.sample_measurement ;;
     value_format: "0.##"
-    drill_fields: [min_sample_measurement,max_sample_measurement,date_gmt_month]
+    drill_fields: [avg_sample_measurement, date_gmt_date]
+    link: {
+      label: "Show as Line Chart"
+      url: "
+      {% assign vis_config = '{
+
+      \"stacking\": \"\",
+      \"show_value_labels\": true,
+      \"label_density\": 25,
+      \"legend_position\": \"center\",
+      \"x_axis_gridlines\": false,
+      \"y_axis_gridlines\": true,
+      \"show_view_names\": false,
+      \"limit_displayed_rows\": false,
+      \"y_axis_combined\": true,
+      \"show_y_axis_labels\": true,
+      \"show_y_axis_ticks\": true,
+      \"y_axis_tick_density\": \"default\",
+      \"y_axis_tick_density_custom\": 5,
+      \"show_x_axis_label\": true,
+      \"show_x_axis_ticks\": true,
+      \"x_axis_scale\": \"auto\",
+      \"y_axis_scale_mode\": \"linear\",
+      \"show_null_points\": true,
+      \"point_style\": \"none\",
+      \"interpolation\": \"linear\",
+      \"show_totals_labels\": false,
+      \"show_silhouette\": false,
+      \"totals_color\": \"#808080\",
+      \"type\": \"looker_area\",
+      \"ordering\": \"none\",
+      \"show_null_labels\": false,
+      \"column_spacing_ratio\": null,
+      \"column_group_spacing_ratio\": null,
+      \"series_types\": {},
+      \"label_color\": [
+        \"black\"
+      ],
+      \"font_size\": \"\",
+      \"label_rotation\": -30
+
+
+      }' %}
+      {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
+
+    }
   }
+
 
   measure: sum_sample_measurement{
     type: sum
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   # returns the midpoint value for the values in a given field
   measure: median_sample_measurement{
     type: median
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: max_sample_measurement{
     type: max
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: min_sample_measurement{
     type: min
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_25_percentile{
     type: percentile
     percentile: 25
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_50_percentile{
     type: percentile
     percentile: 50
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_75_percentile{
     type: percentile
     percentile: 75
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   measure: sample_measurement_90_percentile{
     type: percentile
     percentile: 90
     sql: ${TABLE}.sample_measurement ;;
+    drill_fields: [detail*]
   }
 
   # measures end

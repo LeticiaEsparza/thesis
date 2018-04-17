@@ -34,33 +34,9 @@ explore: no2_hourly_summary {
 
 explore: pm10_daily_summary {}
 explore: pm25_frm_daily_summary {}
-# union all for particulates and then partition
-# partition keys for time_gmt
-# create flag for union all
 
-# explore: co_daily_summary {}
-#
-# explore: co_hourly_summary {}
-#
-# explore: hap_daily_summary {}
-#
-# explore: hap_hourly_summary {}
-#
-# explore: lead_daily_summary {}
-#
-# explore: no2_daily_summary {}
-#
-# explore: no2_hourly_summary {}
-#
-# explore: nonoxnoy_daily_summary {}
-#
-# explore: nonoxnoy_hourly_summary {}
-#
 explore: o3_daily_summary {}
-#
-# explore: o3_hourly_summary {}
 
-# explore: pm10_daily_summary {}
 explore: pm10_hourly_summary {}
 
 # Particulates
@@ -107,34 +83,9 @@ explore: all_particulates {
         AND ${all_particulates.time_gmt} = ${rh_and_dp_hourly_summary.time_gmt}
     ;;
   }
-#   join: all_particulates_daily_filtered {
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
-#           AND ${all_particulates.county_code} = ${all_particulates_daily_filtered.county_code}
-#           AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
-# --          AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw}
-#           ;;
-#   }
-#   join: all_particulates_rank {
-#     view_label: "Rank by Sample Measurement"
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${all_particulates.county_name} = ${all_particulates_rank.county_name}
-#           ;;
-#   }
-#   join: top_n_counties {
-#     view_label: "Rank by AQI"
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${all_particulates.county_name} = ${top_n_counties.county_name} ;;
-#   }
-
-
 }
 
 explore: particulates_daily {}
-
 
 explore: all_gases {
   join: wind_hourly_summary {
@@ -180,6 +131,34 @@ explore: all_gases {
   }
 }
 
+explore: all_particulates_daily_filtered {
+  label: "Pollution Rankings"
+join: all_particulates {
+  type: inner
+  relationship: one_to_one
+    sql_on:
+--            ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
+                ${all_particulates.county_name} = ${all_particulates_daily_filtered.county_name}
+--            AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
+            AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw}
+;;
+ }
+join: all_particulates_rank {
+  view_label: "Rank by Sample Measurement"
+  type: inner
+  relationship: one_to_one
+  sql_on: ${all_particulates_daily_filtered.county_name} = ${all_particulates_rank.county_name}
+    ;;
+}
+join: top_n_counties {
+  view_label: "Rank by AQI"
+  type: inner
+  relationship: one_to_one
+  sql_on: ${all_particulates_daily_filtered.county_name} = ${top_n_counties.county_name} ;;
+}
+}
+
+
 # explore: all_particulates_daily_past_10_years  {
 #   label: "Top N Counties in the Past 10 Years"
 #   join: top_n_counties {
@@ -207,32 +186,7 @@ explore: all_gases {
 # }
 #
 #
-explore: all_particulates_daily_filtered {
-  label: "Pollution Rankings"
-join: all_particulates {
-  type: inner
-  relationship: one_to_one
-    sql_on:
---            ${all_particulates.state_code} = ${all_particulates_daily_filtered.state_code}
-                ${all_particulates.county_name} = ${all_particulates_daily_filtered.county_name}
---            AND ${all_particulates.site_num} = ${all_particulates_daily_filtered.site_num}
-            AND ${all_particulates.date_local_raw} = ${all_particulates_daily_filtered.date_local_raw}
-;;
- }
-join: all_particulates_rank {
-  view_label: "Rank by Sample Measurement"
-  type: inner
-  relationship: one_to_one
-  sql_on: ${all_particulates_daily_filtered.county_name} = ${all_particulates_rank.county_name}
-    ;;
-}
-join: top_n_counties {
-  view_label: "Rank by AQI"
-  type: inner
-  relationship: one_to_one
-  sql_on: ${all_particulates_daily_filtered.county_name} = ${top_n_counties.county_name} ;;
-}
-}
+
 
 #
 # explore: pm10_hourly_summary {}
@@ -272,73 +226,3 @@ explore: rh_and_dp_hourly_summary {}
 #
 # explore: wind_daily_summary {}
 #
-# explore: wind_hourly_summary {}
-# explore: wind_hourly_summary {
-#   label: "Wind and Criteria Gases"
-#   join: o3_hourly_summary {
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${wind_hourly_summary.state_name} = ${o3_hourly_summary.state_name}
-#               AND ${wind_hourly_summary.date_gmt_raw} = ${o3_hourly_summary.date_gmt_raw}
-#               AND ${wind_hourly_summary.time_gmt} = ${o3_hourly_summary.time_gmt}
-#               AND ${wind_hourly_summary.county_name} = ${o3_hourly_summary.county_name}
-#               AND ${wind_hourly_summary.site_num} = ${o3_hourly_summary.site_num}
-#               AND ${wind_hourly_summary.units_of_measure} = "Knots"
-#     ;;
-#   }
-#   join: so2_hourly_summary {
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${wind_hourly_summary.state_name} = ${so2_hourly_summary.state_name}
-#               AND ${wind_hourly_summary.date_gmt_raw} = ${so2_hourly_summary.date_gmt_raw}
-#               AND ${wind_hourly_summary.time_gmt} = ${so2_hourly_summary.time_gmt}
-#               AND ${wind_hourly_summary.county_name} = ${so2_hourly_summary.county_name}
-#               AND ${wind_hourly_summary.site_num} = ${so2_hourly_summary.site_num}
-#               AND ${wind_hourly_summary.units_of_measure} = "Knots"
-#     ;;
-#   }
-#   join: co_hourly_summary {
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${wind_hourly_summary.state_name} = ${co_hourly_summary.state_name}
-#               AND ${wind_hourly_summary.date_gmt_raw} = ${co_hourly_summary.date_gmt_raw}
-#               AND ${wind_hourly_summary.time_gmt} = ${co_hourly_summary.time_gmt}
-#               AND ${wind_hourly_summary.county_name} = ${co_hourly_summary.county_name}
-#               AND ${wind_hourly_summary.site_num} = ${co_hourly_summary.site_num}
-#               AND ${wind_hourly_summary.units_of_measure} = "Knots"
-#     ;;
-#   }
-#   join: no2_hourly_summary {
-#     type: inner
-#     relationship: one_to_one
-#     sql_on: ${wind_hourly_summary.state_name} = ${no2_hourly_summary.state_name}
-#               AND ${wind_hourly_summary.date_gmt_raw} = ${no2_hourly_summary.date_gmt_raw}
-#               AND ${wind_hourly_summary.time_gmt} = ${no2_hourly_summary.time_gmt}
-#               AND ${wind_hourly_summary.county_name} = ${no2_hourly_summary.county_name}
-#               AND ${wind_hourly_summary.site_num} = ${no2_hourly_summary.site_num}
-#               AND ${wind_hourly_summary.units_of_measure} = "Knots"
-#     ;;
-#   }
-# }
-
-#
-#   label: "Criteria Gases"
-#   join: so2_hourly_summary {
-#     type: left_outer
-#     sql_on: ${o3_hourly_summary.o3_key}=${so2_hourly_summary.so2_key} ;;
-#     relationship: many_to_one
-#   }
-#   join: co_hourly_summary {
-#     type: left_outer
-#     sql_on: ${co_hourly_summary.co_key}=${o3_hourly_summary.o3_key} ;;
-#     relationship: many_to_one
-#   }
-#   join: no2_hourly_summary {
-#     type:left_outer
-#     sql: ${o3_hourly_summary.o3_key}=${no2_hourly_summary.no2_key} ;;
-#     relationship: many_to_one
-#   }
-#
-# }
-#
-# explore: pop_view_1 {}
