@@ -310,7 +310,6 @@ dimension: key {
       \"y_axis_scale_mode\": \"linear\",
       \"show_null_points\": false,
       \"point_style\" : \"circle_outline\",
-      \"point_style\": \"none\",
       \"interpolation\": \"linear\",
       \"show_totals_labels\": false,
       \"show_silhouette\": false,
